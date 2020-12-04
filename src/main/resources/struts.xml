@@ -2,19 +2,24 @@
 
 <!DOCTYPE struts PUBLIC
         "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
-        "http://struts.apache.org/dtds/struts-2.0.dtd">
+        "http://struts.apache.org/dtds/struts-2.5.dtd">
 
 <struts>
     <constant name="struts.devMode" value="true"/>
+    <constant name="struts.mapper.action.prefix.enabled" value="true"/>
+    <constant name="struts.enable.DynamicMethodInvocation" value="true" />
+
     <package name="gestao-gastos" extends="struts-default" namespace="/">
+
         <default-action-ref name="home"/>
         <action name="home" class="org.exemple.gestaogastos.actions.HomeAction" >
             <result>index.jsp</result>
         </action>
     </package>
-    <package name="rendimentos" extends="gestao-gastos" namespace="/rendimentos">
-        <action name="*Redimento" class="org.exemple.gestaogastos.actions.rendimentos.RendimentosCrudAction" method="{1}">
-            <result name="SUCCESS">rendimentos/{1}.jsp</result>
+    <package name="rendimentos" extends="struts-default" namespace="/rendimentos" >
+        <action name="Rendimento_*" method="{1}" class="org.exemple.gestaogastos.actions.rendimentos.RendimentosCrudAction" >
+                <result>edit.jsp</result>
+            <allowed-methods>edit</allowed-methods>
         </action>
     </package>
 </struts>
